@@ -31,35 +31,42 @@ export const StudentList = () => {
 
   return (
     <div>
-      <h1 className="flex justify-center">Students Data</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((student: Student) => (
-            <tr key={student.id}>
-              <td>{student.id}</td>
-              <td>{student.name}</td>
-              <td>{student.email}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <h1 className="flex justify-center font-bold underline text-5xl">
+        Students Data
+      </h1>
       <br />
-
-      <div>
-        <form onSubmit={handleSubmit}>
+      <div className="flex justify-center">
+        <table className="border-2">
+          <thead>
+            <tr>
+              <th className="border-2">ID</th>
+              <th className="border-2">Name</th>
+              <th className="border-2">Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((student: Student) => (
+              <tr key={student.id}>
+                <td className="border-2">{student.id}</td>
+                <td className="border-2">{student.name}</td>
+                <td className="border-2">{student.email}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <br />
+      <br />
+      <h1 className="flex justify-center font-bold text-xl">ADD STUDENT</h1>
+      <div className="flex justify-center py-10">
+        <form onSubmit={handleSubmit} className="border-2 px-3 py-3">
           <label>Name : </label>
           <input
             type="string"
             placeholder="Enter your name "
             value={name}
             onChange={(e) => setName(e.target.value)}
+            className="border-2"
           />
           <br />
           <br />
@@ -70,9 +77,12 @@ export const StudentList = () => {
             placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className="border-2"
           />
           <br />
-          <button type="submit">Submit</button>
+          <button type="submit" className="border-2 rounded px-5 mt-3 mx-20">
+            Submit
+          </button>
         </form>
       </div>
     </div>
