@@ -18,7 +18,7 @@ export const StudentList = () => {
   const mutation = useAddStudent();
 
   if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  if (error instanceof Error) return <p>Error: {error.message}</p>;
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -47,13 +47,14 @@ export const StudentList = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map((student: Student) => (
-              <tr key={student.id}>
-                <td className="border-2">{student.id}</td>
-                <td className="border-2">{student.name}</td>
-                <td className="border-2">{student.email}</td>
-              </tr>
-            ))}
+            {data &&
+              data.map((student: Student) => (
+                <tr key={student.id}>
+                  <td className="border-2">{student.id}</td>
+                  <td className="border-2">{student.name}</td>
+                  <td className="border-2">{student.email}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

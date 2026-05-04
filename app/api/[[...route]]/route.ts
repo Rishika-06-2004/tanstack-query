@@ -1,4 +1,4 @@
-import { app } from "@/backend/app";
+import app from "@/backend/app";
 import { handle } from "hono/vercel";
 
 export const GET = handle(app);
