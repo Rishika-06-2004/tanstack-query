@@ -10,6 +10,7 @@ type Student = {
 };
 
 export const StudentList = () => {
+  const [showForm, setShowForm] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
@@ -58,36 +59,48 @@ export const StudentList = () => {
       </div>
       <br />
       <br />
-      <h1 className="flex justify-center font-bold text-xl">ADD STUDENT</h1>
+      <div className="flex justify-center">
+        <button
+          type="button"
+          className="border-2 bg-cyan-500 rounded py-3 px-5"
+          onClick={() => {
+            setShowForm(true);
+          }}
+        >
+          Add Student
+        </button>
+      </div>
       <div className="flex justify-center py-10">
-        <form onSubmit={handleSubmit} className="border-2 px-3 py-3">
-          <label>Name : </label>
-          <input
-            type="text"
-            placeholder="Enter your name "
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="border-2"
-          />
-          <br />
-          <br />
+        {showForm && (
+          <form onSubmit={handleSubmit} className="border-2 px-3 py-3">
+            <label>Name : </label>
+            <input
+              type="text"
+              placeholder="Enter your name "
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="border-2"
+            />
+            <br />
+            <br />
 
-          <label>Email : </label>
-          <input
-            type="text"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="border-2"
-          />
-          <br />
-          <button
-            type="submit"
-            className=" bg-green-700 border-2 rounded px-5 mt-3 mx-20"
-          >
-            Submit
-          </button>
-        </form>
+            <label>Email : </label>
+            <input
+              type="text"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="border-2"
+            />
+            <br />
+            <button
+              type="submit"
+              className=" bg-green-700 border-2 rounded px-5 mt-3 mx-20"
+            >
+              Submit
+            </button>
+          </form>
+        )}
       </div>
     </div>
   );
