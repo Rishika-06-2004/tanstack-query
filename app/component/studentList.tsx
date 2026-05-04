@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import { useStudents, useAddStudent } from "../useStudents";
 
@@ -62,7 +63,7 @@ export const StudentList = () => {
         <form onSubmit={handleSubmit} className="border-2 px-3 py-3">
           <label>Name : </label>
           <input
-            type="string"
+            type="text"
             placeholder="Enter your name "
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -73,14 +74,17 @@ export const StudentList = () => {
 
           <label>Email : </label>
           <input
-            type="string"
+            type="text"
             placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="border-2"
           />
           <br />
-          <button type="submit" className="border-2 rounded px-5 mt-3 mx-20">
+          <button
+            type="submit"
+            className=" bg-green-700 border-2 rounded px-5 mt-3 mx-20"
+          >
             Submit
           </button>
         </form>

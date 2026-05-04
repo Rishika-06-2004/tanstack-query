@@ -1,46 +1,23 @@
-const students = [
-  {
-    id: 1,
-    name: "Riya Sharma",
-    email: "riya@gmail.com",
-  },
-
-  {
-    id: 2,
-    name: "Arjun Das",
-    email: "arjun@gmail.com",
-  },
-
-  {
-    id: 3,
-    name: "Sneha Roy",
-    email: "sneha@gmail.com",
-  },
-
-  {
-    id: 4,
-    name: "Rahul Sen",
-    email: "rahul@gmail.com",
-  },
-
-  {
-    id: 5,
-    name: "Priya Mondal",
-    email: "priya@gmail.com",
-  },
-];
+import { pool } from "@/lib/db-connection";
 
 export async function GET() {
-  return Response.json(students);
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS students(
+      id SERIAL PRIMARY KEY,
+      name TEXT NOT NULL,
+      email TEXT NOT NULL UNIQUE
+    )
+  `);
+
+  const result = await pool.query("SELECT * FROM students ORDER BY id ASC");
+  return Response.json(result.rows);
 }
 
 export async function POST(req: Request) {
   const body = await req.json();
-  const newStudent = {
-    id: students.length + 1,
-    name: body.name,
-    email: body.email,
-  };
-  students.push(newStudent);
-  return Response.json(newStudent);
+  const result = await pool.query(
+    "INSERT INTO students(name, email) VALUES($1, $2) RETURNING *",
+    [body.name, body.email],
+  );
+  return Response.json(result.rows[0]);
 }

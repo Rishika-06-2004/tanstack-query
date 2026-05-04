@@ -39,3 +39,18 @@ export const useAddStudent = () => {
     mutationFn: addStudent,
   });
 };
+
+const createTable = async () => {
+  const response = await fetch("/api/students", { method: "PUT" });
+
+  if (!response.ok) {
+    throw new Error("Failed to create table");
+  }
+  return response.json();
+};
+
+export const useCreateTable = () => {
+  return useMutation({
+    mutationFn: createTable,
+  });
+};
