@@ -3,11 +3,14 @@ import { pool } from "../lib/db-connection";
 
 const studentRoute = new Hono();
 
-studentRoute.get("/", async (c) => {
+studentRoute.put("/", async (c) => {
   await pool.query(
     "CREATE TABLE IF NOT EXISTS students(id SERIAL PRIMARY KEY,name TEXT NOT NULL,email TEXT NOT NULL UNIQUE)",
   );
+  return c.json({ message: "Table created successfully (or already exists)" });
+});
 
+studentRoute.get("/", async (c) => {
   const result = await pool.query("SELECT * FROM students ORDER BY id ASC");
 
   return c.json(result.rows);
